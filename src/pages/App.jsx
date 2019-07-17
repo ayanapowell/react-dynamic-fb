@@ -9,46 +9,80 @@ const allUsers = [
   {
     username: "ayanapowell",
     name: "Ayana Powell",
-    tagline: "Life is short"
+    tagline: "Life is short",
+    following: false
   },
   {
     username: "kassalaholdsclaw",
     name: "Kassala Holdsclaw",
-    tagline: "Living easy"
+    tagline: "Living easy",
+    following: false
   },
   {
     username: "blackrabbit",
     name: "Colby Hayden",
-    tagline: "Mobile bar company"
+    tagline: "Mobile bar company",
+    following: false
   },
   {
     username: "kachoo",
     name: "Tina Kachoo",
-    tagline: "Poet things"
+    tagline: "Poet things",
+    following: false
   },
   {
     username: "mamasan",
     name: "Mayumi Powell",
-    tagline: "Konnichiwa"
+    tagline: "Konnichiwa",
+    following: false
   },
   {
     username: "jamalp",
     name: "Jamal Powell",
-    tagline: "Aloha, friends"
+    tagline: "Aloha, friends",
+    following: true
   }
 ];
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      friendsList: []
+    };
+    this.handleAddFriend = this.handleAddFriend.bind(this);
+    this.handleDeleteFriend = this.handleAddFriend.bind(this);
+  }
+  handleAddFriend(newFriend) {
+    const newFriendsList = this.state.friendsList.slice();
+    if (newFriend.following) {
+      newFriendsList.push(newFriend);
+    }
+    this.setState({ friendsList: newFriendsList });
+  }
+  handleDeleteFriend() {
+    // const newFriendsList = this.state.friendsList.slice();
+    console.log(this.state.friendsList);
+  }
   render() {
     return (
       <div className="container">
         <Header />
         <Switch>
-          <Route exact path="/" component={Dashboard} />
+          <Route
+            exact
+            path="/"
+            render={() => <Dashboard allUsers={this.state.friendsList} />}
+          />
           <Route path="/friend-profile" component={FriendProfile} />
           <Route
             path="/all-users"
-            render={() => <Users userList={allUsers} />}
+            render={() => (
+              <Users
+                userList={allUsers}
+                onAddNewFriend={this.handleAddFriend}
+              />
+            )}
           />
         </Switch>
       </div>

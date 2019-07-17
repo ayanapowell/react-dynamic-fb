@@ -21,7 +21,9 @@ function Users(props) {
             username={user.username}
             name={user.name}
             tagline={user.tagline}
+            following={user.following}
             key={v4()}
+            onAddNewFriend={props.onAddNewFriend}
           />
         ))}
       </UsersEl>

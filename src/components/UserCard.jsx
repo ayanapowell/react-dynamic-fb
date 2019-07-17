@@ -24,7 +24,7 @@ const UserCardEl = styled.div`
     font-size: 12px;
     color: #34579e;
     margin-top: 20px;
-    li:first-child {
+    li:first-of-type {
       margin-right: 15px;
       cursor: pointer;
     }
@@ -34,6 +34,21 @@ const UserCardEl = styled.div`
 class UserCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      following: this.props.following
+    };
+    this.handleToggleFriend = this.handleToggleFriend.bind(this);
+  }
+  handleToggleFriend(event) {
+    event.preventDefault();
+
+    // this.props.onAddNewFriend({
+    //   username: this.props.username,
+    //   name: this.props.name,
+    //   tagline: this.props.tagline,
+    //   following: !this.props.following
+    // });
+    this.setState({ following: !this.props.following });
   }
   render() {
     return (
@@ -46,8 +61,9 @@ class UserCard extends React.Component {
 
           <p className="tagline">{this.props.tagline}</p>
           <ul className="list-unstyled links">
-            <li>Follow</li>
-            <li>Unfollow</li>
+            <li onClick={this.handleToggleFriend}>
+              {this.state.following ? "Unfollow" : "Follow"}
+            </li>
           </ul>
         </UserCardEl>
       </div>

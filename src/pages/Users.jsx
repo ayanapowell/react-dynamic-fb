@@ -24,6 +24,7 @@ function Users(props) {
             following={user.following}
             key={v4()}
             onAddNewFriend={props.onAddNewFriend}
+            onRemoveFriend={props.onRemoveFriend}
           />
         ))}
       </UsersEl>

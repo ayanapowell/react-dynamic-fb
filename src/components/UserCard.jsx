@@ -35,20 +35,29 @@ class UserCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      following: this.props.following
+      following: false
     };
     this.handleToggleFriend = this.handleToggleFriend.bind(this);
   }
   handleToggleFriend(event) {
     event.preventDefault();
 
-    // this.props.onAddNewFriend({
-    //   username: this.props.username,
-    //   name: this.props.name,
-    //   tagline: this.props.tagline,
-    //   following: !this.props.following
-    // });
-    this.setState({ following: !this.props.following });
+    if (!this.state.following) {
+      this.props.onAddNewFriend({
+        username: this.props.username,
+        name: this.props.name,
+        tagline: this.props.tagline,
+        following: !this.props.following
+      });
+      this.setState({ following: false });
+    } else {
+      this.props.onRemoveFriend({
+        username: this.props.username,
+        name: this.props.name,
+        tagline: this.props.tagline,
+        following: false
+      });
+    }
   }
   render() {
     return (

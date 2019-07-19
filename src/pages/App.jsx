@@ -9,38 +9,32 @@ const allUsers = [
   {
     username: "ayanapowell",
     name: "Ayana Powell",
-    tagline: "Life is short",
-    following: false
+    tagline: "Life is short"
   },
   {
     username: "kassalaholdsclaw",
     name: "Kassala Holdsclaw",
-    tagline: "Living easy",
-    following: false
+    tagline: "Living easy"
   },
   {
     username: "blackrabbit",
     name: "Colby Hayden",
-    tagline: "Mobile bar company",
-    following: false
+    tagline: "Mobile bar company"
   },
   {
     username: "kachoo",
     name: "Tina Kachoo",
-    tagline: "Poet things",
-    following: false
+    tagline: "Poet things"
   },
   {
     username: "mamasan",
     name: "Mayumi Powell",
-    tagline: "Konnichiwa",
-    following: false
+    tagline: "Konnichiwa"
   },
   {
     username: "jamalp",
     name: "Jamal Powell",
-    tagline: "Aloha, friends",
-    following: true
+    tagline: "Aloha, friends"
   }
 ];
 
@@ -55,14 +49,11 @@ class App extends React.Component {
   }
   handleAddFriend(newFriend) {
     const newFriendsList = this.state.friendsList.slice();
-    if (newFriend.following) {
-      newFriendsList.push(newFriend);
-    }
+    newFriendsList.push(newFriend.merge({ following: true }));
     this.setState({ friendsList: newFriendsList });
   }
-  handleDeleteFriend() {
-    // const newFriendsList = this.state.friendsList.slice();
-    console.log(this.state.friendsList);
+  handleDeleteFriend(deletedFriend) {
+    console.log(deletedFriend);
   }
   render() {
     return (
@@ -81,6 +72,7 @@ class App extends React.Component {
               <Users
                 userList={allUsers}
                 onAddNewFriend={this.handleAddFriend}
+                onRemoveFriend={this.handleDeleteFriend}
               />
             )}
           />
